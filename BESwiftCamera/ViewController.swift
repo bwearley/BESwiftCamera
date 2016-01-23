@@ -95,7 +95,6 @@ class ViewController: UIViewController {
             self.view.addSubview(self.switchButton)
         }
 
-
         // Photo/Video Toggle
         self.segmentedControl = UISegmentedControl(items: ["Picture","Video"])
         self.segmentedControl.frame = CGRectMake(12.0, screenRect.size.height - 67.0, 120.0, 32.0)
