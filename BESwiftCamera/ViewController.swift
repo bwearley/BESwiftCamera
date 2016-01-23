@@ -20,7 +20,6 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
         self.attachCamera()
     }
 
@@ -40,20 +39,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.blackColor()
-
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-
         let screenRect = UIScreen.mainScreen().bounds
 
+        // Configure Camera
         self.camera = BESwiftCamera(withQuality: AVCaptureSessionPresetHigh, position: .Rear, videoEnabled: true)
-
         self.camera.attachToViewController(self, withFrame: CGRectMake(0,0,screenRect.size.width,screenRect.size.height))
-
         self.camera.fixOrientationAfterCapture = true
-
         self.camera.onDeviceChange = {
             [weak self] camera, device in
-
             if camera.isFlashAvailable() {
                 self!.flashButton.hidden = false
 
@@ -67,6 +61,7 @@ class ViewController: UIViewController {
             }
         }
 
+        // Snap/Record Button
         self.snapButton = UIButton(type: .Custom)
         self.snapButton.frame = CGRectMake(0, 0, 70.0, 70.0)
         self.snapButton.clipsToBounds = true
@@ -79,7 +74,7 @@ class ViewController: UIViewController {
         self.snapButton.addTarget(self, action: Selector("snapButtonPressed:"), forControlEvents: .TouchUpInside)
         self.view.addSubview(self.snapButton)
 
-        // button to toggle flash
+        // Flash Toggle Button
         self.flashButton = UIButton(type: .System)
         self.flashButton.frame = CGRectMake(0, 0, 16.0 + 20.0, 24.0 + 20.0)
         self.flashButton.tintColor = UIColor.whiteColor()
@@ -88,6 +83,7 @@ class ViewController: UIViewController {
         self.flashButton.addTarget(self, action: Selector("flashButtonPressed:"), forControlEvents: .TouchUpInside)
         self.view.addSubview(self.flashButton)
 
+        // Front/Rear Camera Toggle
         if BESwiftCamera.isFrontCameraAvailable() && BESwiftCamera.isRearCameraAvailable() {
             // button to toggle camera positions
             self.switchButton = UIButton(type: .System)
@@ -99,6 +95,8 @@ class ViewController: UIViewController {
             self.view.addSubview(self.switchButton)
         }
 
+
+        // Photo/Video Toggle
         self.segmentedControl = UISegmentedControl(items: ["Picture","Video"])
         self.segmentedControl.frame = CGRectMake(12.0, screenRect.size.height - 67.0, 120.0, 32.0)
         self.segmentedControl.selectedSegmentIndex = 0
@@ -229,6 +227,8 @@ class ViewController: UIViewController {
         self.segmentedControl.frame.origin.y = (self.view.frame.size.height - 35.0)-self.segmentedControl.frame.height
         
     }
+
+    // MARK: UIAlertControllers
 
     func showCameraPermissionAlert() {
         let alertController = UIAlertController(
