@@ -1,5 +1,5 @@
 # BESwiftCamera: simple camera controller for iOS written in Swift 
-BESwiftCamera is a simple camera controller for taking photos/videos in iOS applications written in Swift version 2. Ported from LLSimpleCamera in Objective-C.
+BESwiftCamera is a simple camera controller for taking photos/videos in iOS applications written in Swift 2.0. Ported from LLSimpleCamera in Objective-C.
 
 ## Initializing Camera
 ```swift
