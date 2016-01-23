@@ -16,13 +16,13 @@ enum BESwiftCameraPosition {
 }
 
 enum BESwiftCameraFlash {
-    case Off // The default state has to be off
+    case Off
     case On
     case Auto
 }
 
 enum BESwiftCameraMirror {
-    case Off // The default state has to be off
+    case Off
     case On
     case Auto
 }
