@@ -5,7 +5,6 @@ BESwiftCamera is a simple camera controller for taking photos/videos in iOS appl
 ```swift
 class ViewController: UIViewController {
     var camera:BESwiftCamera!
-
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.attachCamera()
