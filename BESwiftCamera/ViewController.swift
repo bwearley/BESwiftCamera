@@ -18,12 +18,6 @@ class ViewController: UIViewController {
     var flashButton:UIButton!
     var segmentedControl:UISegmentedControl!
 
-    /*override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        self.attachCamera()
-    }*/
-
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -32,7 +26,6 @@ class ViewController: UIViewController {
 
     func attachCamera() {
         do {
-            //try self.camera.start()
             try self.camera.start()
         } catch BESwiftCameraErrorCode.CameraPermission {
             self.showCameraPermissionAlert()
@@ -153,16 +146,12 @@ class ViewController: UIViewController {
     func snapButtonPressed(sender:UIButton) {
         if self.segmentedControl.selectedSegmentIndex == 0 {
             // Capture
-            self.camera.capture({
+            self.camera.capture(exactSeenImage:true) {
                 [weak self] camera,image,dictionary in
                 camera.performSelector(Selector("stop"), withObject: nil, afterDelay: 0.2)
                 let imageVC = ImageViewController(withImage: image)
                 self!.presentViewController(imageVC, animated: true, completion: nil)
-                }, exactSeenImage: true)
-            // We should stop the camera, we are opening a new vc, thus we don't need it anymore.
-            // This is important, otherwise you may experience memory crashes.
-            // Camera is started again at viewWillAppear after the user comes back to this view.
-            // I put the delay, because in iOS9 the shutter sound gets interrupted if we call it directly.
+            }
         } else {
             if self.camera.isRecording() == false {
                 // Not Recording -> Start Recording
@@ -171,7 +160,7 @@ class ViewController: UIViewController {
                 self.styleSnapButtonAsRecording()
 
                 // start recording
-                let outputURL = self.applicationDocumentsDirectory.URLByAppendingPathComponent("test1").URLByAppendingPathExtension("mov")
+                let outputURL = self.applicationDocumentsDirectory.URLByAppendingPathComponent("thisVideo").URLByAppendingPathExtension("mov")
                 do {
                     try self.camera.startRecordingWithOutputUrl(outputURL)
                 } catch {
@@ -241,8 +230,7 @@ class ViewController: UIViewController {
         
     }
 
-    func showCameraPermissionAlert()
-    {
+    func showCameraPermissionAlert() {
         let alertController = UIAlertController(
             title: "Camera Permission Denied",
             message: "You have not allowed access to the camera.",
@@ -254,8 +242,7 @@ class ViewController: UIViewController {
         self.camera.presentViewController(alertController, animated: true, completion: nil)
     }
 
-    func showMicrophonePermissionAlert()
-    {
+    func showMicrophonePermissionAlert() {
         let alertController = UIAlertController(
             title: "Microphone Permission Denied",
             message: "You have not allowed access to the microphone.",
@@ -267,8 +254,7 @@ class ViewController: UIViewController {
         self.camera.presentViewController(alertController, animated: true, completion: nil)
     }
 
-    func showUnknownErrorAlert()
-    {
+    func showUnknownErrorAlert() {
         let alertController = UIAlertController(
             title: "Unknown Error",
             message: "An unknown error has occurred with the camera.",

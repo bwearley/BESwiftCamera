@@ -163,18 +163,13 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
                         {
                             try BESwiftCamera.requestMicrophonePermission() {
                                 granted in
-                                if (granted)
-                                {
+                                if (granted)                                 {
                                     self.initialize()
-                                }
-                                else
-                                {
+                                } else {
                                     throw BESwiftCameraErrorCode.MicrophonePermission
                                 }
                             }
-                        }
-                        else
-                        {
+                        } else {
                             self.initialize()
                         }
                     }
@@ -218,7 +213,7 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
             //devicePosition = AVCaptureDevicePosition.Unspecified
         }
 
-        if devicePosition == AVCaptureDevicePosition.Unspecified {
+        if devicePosition == .Unspecified {
             self.videoCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         } else {
             self.videoCaptureDevice = self.cameraWithPosition(devicePosition)
@@ -274,8 +269,43 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
     }
 
     // MARK: - Image Capture
+    /*func capture(onCaptureBlock:((BESwiftCamera,UIImage,NSDictionary) -> Void), exactSeenImage:Bool) {
+        if self.session == nil {
+            onCaptureBlock(self,UIImage(),[:])
+            return
+        }
 
-    func capture(onCaptureBlock:((BESwiftCamera,UIImage,NSDictionary) -> Void), exactSeenImage:Bool) {
+        // get connection and set orientation
+        let videoConnection = self.captureConnection
+        videoConnection.videoOrientation = self.orientationForConnection
+
+        // freeze the screen
+        self.captureVideoPreviewLayer.connection.enabled = false
+        self.stillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection) {
+            buffer, error in
+
+            let exifAttachments = CMGetAttachment(buffer, kCGImagePropertyExifDictionary, nil) as! CFDictionaryRef
+            let metaData = exifAttachments
+
+            let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
+            var image = UIImage(data: imageData)!
+
+            if exactSeenImage {
+                image = self.cropImageUsingPreviewBounds(image)
+            }
+
+            if self.fixOrientationAfterCapture == true {
+                //image = image.fixOrientation()
+            }
+
+            // trigger the block
+            dispatch_async(dispatch_get_main_queue()) {
+                onCaptureBlock(self,image,metaData)
+            }
+        }
+    }*/
+
+    func capture(exactSeenImage exactSeenImage:Bool, onCaptureBlock:((BESwiftCamera,UIImage,NSDictionary) -> Void)) {
         if self.session == nil {
             onCaptureBlock(self,UIImage(),[:])
             return
@@ -312,7 +342,7 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
     }
 
     func capture(onCapture:((BESwiftCamera,UIImage,NSDictionary) -> Void)) {
-        self.capture(onCapture, exactSeenImage:false)
+        self.capture(exactSeenImage:false, onCaptureBlock: onCapture)
     }
 
     // MARK: - Video Capture
@@ -483,7 +513,7 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
         let videoConnection:AVCaptureConnection = self.movieFileOutput.connectionWithMediaType(AVMediaTypeVideo)
         let pictureConnection:AVCaptureConnection = self.stillImageOutput.connectionWithMediaType(AVMediaTypeVideo)
 
-        switch (mirror) {
+        switch mirror {
         case .Off:
             if (videoConnection.supportsVideoMirroring) {
                 videoConnection.videoMirrored = false
@@ -511,7 +541,7 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
     }
 
     func togglePosition() -> BESwiftCameraPosition {
-        if (self.session == nil) {
+        if self.session == nil {
             return self.position
         }
         if self.position == .Rear {
@@ -543,7 +573,7 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
         // get new input
         var device:AVCaptureDevice
 
-        if (self.videoDeviceInput.device.position == .Back) {
+        if self.videoDeviceInput.device.position == .Back {
             device = self.cameraWithPosition(.Front)
         } else {
             device = self.cameraWithPosition(.Back)
@@ -755,11 +785,6 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
         }
         return videoOrientation
     }
-
-
-    /*func dealloc() {
-    self.stop()
-    }*/
 
     // MARK: Legacy Getters
     func isVideoEnabled() -> Bool { return self.videoEnabled }

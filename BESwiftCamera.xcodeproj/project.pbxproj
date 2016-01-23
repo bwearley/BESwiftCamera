@@ -23,7 +23,6 @@
 		D3E9884F1C4DAD7400715F57 /* cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E988481C4DAD7400715F57 /* cancel@2x.png */; };
 		D3E988501C4DAD7400715F57 /* cancel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E988491C4DAD7400715F57 /* cancel@3x.png */; };
 		D3E988531C4DAD8300715F57 /* FixOrientationUIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E988521C4DAD8300715F57 /* FixOrientationUIImageExtension.swift */; };
-		D3E988551C4DCD9800715F57 /* BESwiftCameraBACKUP.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E988541C4DCD9800715F57 /* BESwiftCameraBACKUP.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +44,6 @@
 		D3E988481C4DAD7400715F57 /* cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@2x.png"; sourceTree = "<group>"; };
 		D3E988491C4DAD7400715F57 /* cancel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@3x.png"; sourceTree = "<group>"; };
 		D3E988521C4DAD8300715F57 /* FixOrientationUIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixOrientationUIImageExtension.swift; sourceTree = "<group>"; };
-		D3E988541C4DCD9800715F57 /* BESwiftCameraBACKUP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BESwiftCameraBACKUP.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +79,6 @@
 				D3E9882B1C4DAD2800715F57 /* AppDelegate.swift */,
 				D3E988321C4DAD2800715F57 /* Assets.xcassets */,
 				D3E988411C4DAD5F00715F57 /* BESwiftCamera.swift */,
-				D3E988541C4DCD9800715F57 /* BESwiftCameraBACKUP.swift */,
 				D3E988521C4DAD8300715F57 /* FixOrientationUIImageExtension.swift */,
 				D3E988511C4DAD7800715F57 /* Images */,
 				D3E9883D1C4DAD4D00715F57 /* ImageViewController.swift */,
@@ -190,7 +187,6 @@
 				D3E9882E1C4DAD2800715F57 /* ViewController.swift in Sources */,
 				D3E9883E1C4DAD4D00715F57 /* ImageViewController.swift in Sources */,
 				D3E988421C4DAD5F00715F57 /* BESwiftCamera.swift in Sources */,
-				D3E988551C4DCD9800715F57 /* BESwiftCameraBACKUP.swift in Sources */,
 				D3E988401C4DAD5800715F57 /* VideoViewController.swift in Sources */,
 				D3E988531C4DAD8300715F57 /* FixOrientationUIImageExtension.swift in Sources */,
 				D3E9882C1C4DAD2800715F57 /* AppDelegate.swift in Sources */,
