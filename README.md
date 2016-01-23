@@ -29,6 +29,9 @@ class ViewController: UIViewController {
         // Configure Camera
         self.camera = BESwiftCamera(withQuality: AVCaptureSessionPresetHigh, position: .Rear, videoEnabled: true)
         self.camera.attachToViewController(self, withFrame: CGRectMake(0,0,screenRect.size.width,screenRect.size.height))
+    ...
+    }
+}
 ```
 
 ## Capturing Photo
