@@ -544,9 +544,11 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
             return self.position
         }
         if self.position == .Rear {
-            self.cameraPosition = .Front
+            //self.cameraPosition = .Front
+            self.setCameraPosition(.Front)
         } else {
-            self.cameraPosition = .Rear
+            //self.cameraPosition = .Rear
+            self.setCameraPosition(.Rear)
         }
         return self.position
     }
