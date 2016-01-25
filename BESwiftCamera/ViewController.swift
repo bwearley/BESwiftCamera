@@ -122,14 +122,12 @@ class ViewController: UIViewController {
 
     func flashButtonPressed(sender:UIButton) {
         if self.camera.flash == .Off {
-            let done = self.camera.updateFlashMode(.On)
-            if done {
+            if self.camera.updateFlashMode(.On) {
                 self.flashButton.selected = true
                 self.flashButton.tintColor = UIColor.yellowColor()
             }
         } else {
-            let done = self.camera.updateFlashMode(.Off)
-            if done {
+            if self.camera.updateFlashMode(.Off) {
                 self.flashButton.selected = false
                 self.flashButton.tintColor = UIColor.whiteColor()
             }
