@@ -476,12 +476,12 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
     }
 
     func updateFlashMode(cameraFlash:BESwiftCameraFlash) -> Bool {
-        if (self.session == nil) {
+        if self.session == nil {
             return false
         }
         var flashMode:AVCaptureFlashMode
 
-        if (cameraFlash == .On) {
+        if cameraFlash == .On {
             flashMode = AVCaptureFlashMode.On
         } else if (cameraFlash == .Auto) {
             flashMode = AVCaptureFlashMode.Auto
@@ -505,7 +505,7 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
     func setMirror(mirror:BESwiftCameraMirror) {
         self.mirror = mirror
 
-        if (self.session == nil) {
+        if self.session == nil {
             return
         }
 
@@ -514,25 +514,25 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
 
         switch mirror {
         case .Off:
-            if (videoConnection.supportsVideoMirroring) {
+            if videoConnection.supportsVideoMirroring {
                 videoConnection.videoMirrored = false
             }
-            if (pictureConnection.supportsVideoMirroring) {
+            if pictureConnection.supportsVideoMirroring {
                 pictureConnection.videoMirrored = false
             }
         case .On:
-            if (videoConnection.supportsVideoMirroring) {
+            if videoConnection.supportsVideoMirroring {
                 videoConnection.videoMirrored = true
             }
-            if (pictureConnection.supportsVideoMirroring) {
+            if pictureConnection.supportsVideoMirroring {
                 pictureConnection.videoMirrored = true
             }
         case .Auto:
             let shouldMirror = (self.position == .Front)
-            if (videoConnection.supportsVideoMirroring) {
+            if videoConnection.supportsVideoMirroring {
                 videoConnection.videoMirrored = shouldMirror
             }
-            if (pictureConnection.supportsVideoMirroring) {
+            if pictureConnection.supportsVideoMirroring {
                 pictureConnection.videoMirrored = shouldMirror
             }
         }
@@ -578,7 +578,7 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
             device = self.cameraWithPosition(.Back)
         }
 
-        //if (device == nil) { return }
+        //if device == nil { return }
 
         // add input to session
         var videoInput:AVCaptureDeviceInput
