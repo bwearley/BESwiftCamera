@@ -87,8 +87,7 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
         self.setupWithQuality(AVCaptureSessionPresetHigh, position:.Rear, videoEnabled:true)
     }
 
-    convenience init()
-    {
+    convenience init() {
         self.init(withVideoEnabled:false)
     }
 
