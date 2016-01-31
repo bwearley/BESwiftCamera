@@ -330,7 +330,7 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
             }
 
             if self.fixOrientationAfterCapture == true {
-                //image = image.fixOrientation()
+                image = image.fixOrientation()
             }
 
             // trigger the block
@@ -759,7 +759,7 @@ class BESwiftCamera: UIViewController, AVCaptureFileOutputRecordingDelegate {
     var orientationForConnection:AVCaptureVideoOrientation {
         var videoOrientation:AVCaptureVideoOrientation = AVCaptureVideoOrientation.Portrait
 
-        if (self.useDeviceOrientation == true) {
+        if self.useDeviceOrientation == true {
             switch UIDevice.currentDevice().orientation {
             case .LandscapeLeft:
                 // yes we to the right, this is not a bug!
