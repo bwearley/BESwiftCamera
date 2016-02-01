@@ -206,10 +206,6 @@ class ViewController: UIViewController {
         self.camera.view.frame = self.view.bounds
 
         self.snapButton.center = self.view.center
-
-        self.flashButton.center = self.view.center
-
-        self.snapButton.center = self.view.center
         self.snapButton.frame.origin.y = (self.view.frame.height - 15)-self.snapButton.frame.height
 
         self.flashButton.center = self.view.center
